@@ -17,3 +17,5 @@ connection.connect((err)=>{
     else
     console.log(err);
 })
+
+module.exports = connection;
