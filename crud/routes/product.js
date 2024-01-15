@@ -53,4 +53,24 @@ router.patch('/update/:id',(req,res,next)=>{
     });
 })
 
+// API for delete (DELETE Request)
+router.delete('/delete/:id',(req, res, next)=>{
+    const id = req.params.id;
+    let query = "delete from product where id=?";
+    connection.query(query, [id], (err, results)=>{
+        if (!err) 
+        {
+            if (results.affectedRows == 0) 
+            {
+                return res.status(404).json({message: "Product ID not found"});
+            }
+            return res.status(200).json({message: "Product Deleted Successfully from products list."});
+        }
+        else
+        {
+            return res.status(500).json(err);
+        }
+    })
+})
+
 module.exports = router;
